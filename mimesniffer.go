@@ -8,52 +8,58 @@ import (
 	"strings"
 )
 
-// sniffers is the supported sniffers beyond the `http.DetectContentType()`.
-var sniffers = map[string]func([]byte) bool{
-	"application/epub+zip":              applicationEPUBZip,
-	"application/font-sfnt":             applicationFontSFNT,
-	"application/font-woff":             applicationFontWOFF,
-	"application/msword":                applicationMSWord,
-	"application/rtf":                   applicationRTF,
-	"application/vnd.ms-cab-compressed": applicationVNDMSCABCompressed,
-	"application/vnd.ms-excel":          applicationVNDMSExcel,
-	"application/vnd.ms-powerpoint":     applicationVNDMSPowerpoint,
-	"application/vnd.openxmlformats-officedocument.presentationml.presentation": applicationVNDOpenXMLFormatsOfficeDocumentPresentationMLPresentation,
-	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":         applicationVNDOpenXMLFormatsOfficeDocumentSpreadsheeetMLSheet,
-	"application/vnd.openxmlformats-officedocument.wordprocessingml.document":   applicationVNDOpenXMLFormatsOfficeDocumentWordprocessingMLDocument,
-	"application/x-7z-compressed":                                               applicationX7ZCompressed,
-	"application/x-bzip2":                                                       applicationXBzip2,
-	"application/x-compress":                                                    applicationXCompress,
-	"application/x-deb":                                                         applicationXDEB,
-	"application/x-executable":                                                  applicationXExecutable,
-	"application/x-google-chrome-extension":                                     applicationXGoogleChromeExtension,
-	"application/x-lzip":                                                        applicationXLzip,
-	"application/x-msdownload":                                                  applicationXMSDownload,
-	"application/x-nintendo-nes-rom":                                            applicationXNintendoNESROM,
-	"application/x-rpm":                                                         applicationXRPM,
-	"application/x-shockwave-flash":                                             applicationXShockwaveFlash,
-	"application/x-sqlite3":                                                     applicationXSQLite3,
-	"application/x-tar":                                                         applicationXTar,
-	"application/x-unix-archive":                                                applicationXUNIXArchive,
-	"application/x-xz":                                                          applicationXXZ,
-	"audio/aac":                                                                 audioAAC,
-	"audio/amr":                                                                 audioAMR,
-	"audio/m4a":                                                                 audioM4A,
-	"audio/ogg":                                                                 audioOgg,
-	"audio/x-flac":                                                              audioXFLAC,
-	"audio/x-wav":                                                               audioXWAV,
-	"image/jp2":                                                                 imageJP2,
-	"image/tiff":                                                                imageTIFF,
-	"image/vnd.adobe.photoshop":                                                 imageVNDAdobePhotoshop,
-	"image/x-canon-cr2":                                                         imageXCanonCR2,
-	"video/mpeg":                                                                videoMPEG,
-	"video/quicktime":                                                           videoQuickTime,
-	"video/x-flv":                                                               videoXFLV,
-	"video/x-m4v":                                                               videoXM4V,
-	"video/x-matroska":                                                          videoXMatroska,
-	"video/x-ms-wmv":                                                            videoXMSWMV,
-	"video/x-msvideo":                                                           videoXMSVideo,
-}
+var (
+	// defaultSniffers is the default supported sniffers beyond the
+	// `http.DetectContentType()`.
+	defaultSniffers = map[string]func([]byte) bool{
+		"application/epub+zip":              applicationEPUBZip,
+		"application/font-sfnt":             applicationFontSFNT,
+		"application/font-woff":             applicationFontWOFF,
+		"application/msword":                applicationMSWord,
+		"application/rtf":                   applicationRTF,
+		"application/vnd.ms-cab-compressed": applicationVNDMSCABCompressed,
+		"application/vnd.ms-excel":          applicationVNDMSExcel,
+		"application/vnd.ms-powerpoint":     applicationVNDMSPowerpoint,
+		"application/vnd.openxmlformats-officedocument.presentationml.presentation": applicationVNDOpenXMLFormatsOfficeDocumentPresentationMLPresentation,
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":         applicationVNDOpenXMLFormatsOfficeDocumentSpreadsheeetMLSheet,
+		"application/vnd.openxmlformats-officedocument.wordprocessingml.document":   applicationVNDOpenXMLFormatsOfficeDocumentWordprocessingMLDocument,
+		"application/x-7z-compressed":                                               applicationX7ZCompressed,
+		"application/x-bzip2":                                                       applicationXBzip2,
+		"application/x-compress":                                                    applicationXCompress,
+		"application/x-deb":                                                         applicationXDEB,
+		"application/x-executable":                                                  applicationXExecutable,
+		"application/x-google-chrome-extension":                                     applicationXGoogleChromeExtension,
+		"application/x-lzip":                                                        applicationXLzip,
+		"application/x-msdownload":                                                  applicationXMSDownload,
+		"application/x-nintendo-nes-rom":                                            applicationXNintendoNESROM,
+		"application/x-rpm":                                                         applicationXRPM,
+		"application/x-shockwave-flash":                                             applicationXShockwaveFlash,
+		"application/x-sqlite3":                                                     applicationXSQLite3,
+		"application/x-tar":                                                         applicationXTar,
+		"application/x-unix-archive":                                                applicationXUNIXArchive,
+		"application/x-xz":                                                          applicationXXZ,
+		"audio/aac":                                                                 audioAAC,
+		"audio/amr":                                                                 audioAMR,
+		"audio/m4a":                                                                 audioM4A,
+		"audio/ogg":                                                                 audioOgg,
+		"audio/x-flac":                                                              audioXFLAC,
+		"audio/x-wav":                                                               audioXWAV,
+		"image/jp2":                                                                 imageJP2,
+		"image/tiff":                                                                imageTIFF,
+		"image/vnd.adobe.photoshop":                                                 imageVNDAdobePhotoshop,
+		"image/x-canon-cr2":                                                         imageXCanonCR2,
+		"video/mpeg":                                                                videoMPEG,
+		"video/quicktime":                                                           videoQuickTime,
+		"video/x-flv":                                                               videoXFLV,
+		"video/x-m4v":                                                               videoXM4V,
+		"video/x-matroska":                                                          videoXMatroska,
+		"video/x-ms-wmv":                                                            videoXMSWMV,
+		"video/x-msvideo":                                                           videoXMSVideo,
+	}
+
+	// registeredSniffers is the registered supported sniffers.
+	registeredSniffers = map[string]func([]byte) bool{}
+)
 
 // Register registers the sniffer for the mimeType. Invalid MIME types will be
 // silently dropped.
@@ -63,7 +69,7 @@ func Register(mimeType string, sniffer func([]byte) bool) {
 		return
 	}
 
-	sniffers[mimeType] = sniffer
+	registeredSniffers[mimeType] = sniffer
 }
 
 // Sniff sniffs the MIME type of the b. It considers at most the first 512 bytes
@@ -76,11 +82,19 @@ func Sniff(b []byte) string {
 
 	if len(b) == 0 {
 		return unknownType
-	} else if mt := http.DetectContentType(b); mt != unknownType {
+	}
+
+	for mt, s := range registeredSniffers {
+		if s(b) {
+			return mt
+		}
+	}
+
+	if mt := http.DetectContentType(b); mt != unknownType {
 		return mt
 	}
 
-	for mt, s := range sniffers {
+	for mt, s := range defaultSniffers {
 		if s(b) {
 			return mt
 		}
