@@ -32,6 +32,7 @@ func TestSniff(t *testing.T) {
 	})
 
 	assert.Equal(t, Sniff([]byte{0x00}), "foo/bar")
-	assert.Equal(t, Sniff([]byte("foobar")), "text/plain; charset=utf-8")
 	assert.Equal(t, Sniff([]byte{0x01}), "application/octet-stream")
+	assert.Equal(t, Sniff([]byte{0xff, 0xf1}), "audio/aac")
+	assert.Equal(t, Sniff([]byte("foobar")), "text/plain; charset=utf-8")
 }

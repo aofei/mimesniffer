@@ -78,10 +78,8 @@ func Register(mimeType string, sniffer func([]byte) bool) {
 // It always returns a valid MIME type: if it cannot determine a more specific
 // one, it returns "application/octet-stream".
 func Sniff(b []byte) string {
-	const unknownType = "application/octet-stream"
-
 	if len(b) == 0 {
-		return unknownType
+		return "application/octet-stream"
 	}
 
 	for mt, s := range registeredSniffers {
@@ -90,17 +88,13 @@ func Sniff(b []byte) string {
 		}
 	}
 
-	if mt := http.DetectContentType(b); mt != unknownType {
-		return mt
-	}
-
 	for mt, s := range defaultSniffers {
 		if s(b) {
 			return mt
 		}
 	}
 
-	return unknownType
+	return http.DetectContentType(b)
 }
 
 // applicationEPUBZip reports whether the b's MIME type is

@@ -8,8 +8,11 @@
 A MIME type sniffer for Go.
 
 MIMESniffer implements the algorithm described at
-[here](https://mimesniff.spec.whatwg.org) to determine the MIME type of the
-given data. So it can be used as a substitute for `http.DetectContentType()`.
+[here](https://mimesniff.spec.whatwg.org) and uses the file signatures (aka
+[magic numbers](https://en.wikipedia.org/wiki/Magic_number_\(programming\)#Magic_numbers_in_files))
+listed [here](https://www.garykessler.net/library/file_sigs.html) to determine
+the MIME type of the given data. So it can be used as an alternative for the
+`http.DetectContentType()`.
 
 ## Features
 
