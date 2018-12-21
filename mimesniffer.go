@@ -279,13 +279,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentPresentationMLPresentation(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i := bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 	end = start + 6000
 	if end > bl {
 		end = bl
@@ -295,13 +294,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentPresentationMLPresentation(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i = bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 	if bl < l+start && bytes.Equal(b[start:l+start], pptx) {
 		return true
 	}
@@ -316,13 +314,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentPresentationMLPresentation(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i = bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 
 	return bl < l+start && bytes.Equal(b[start:l+start], pptx)
 }
@@ -362,13 +359,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentSpreadsheeetMLSheet(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i := bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 	end = start + 6000
 	if end > bl {
 		end = bl
@@ -378,13 +374,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentSpreadsheeetMLSheet(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i = bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 	if bl < l+start && bytes.Equal(b[start:l+start], xlsx) {
 		return true
 	}
@@ -399,13 +394,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentSpreadsheeetMLSheet(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i = bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 
 	return bl < l+start && bytes.Equal(b[start:l+start], xlsx)
 }
@@ -445,13 +439,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentWordprocessingMLDocument(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i := bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 	end = start + 6000
 	if end > bl {
 		end = bl
@@ -461,13 +454,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentWordprocessingMLDocument(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i = bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 	if bl < l+start && bytes.Equal(b[start:l+start], word) {
 		return true
 	}
@@ -482,13 +474,12 @@ func applicationVNDOpenXMLFormatsOfficeDocumentWordprocessingMLDocument(
 		return false
 	}
 
-	if i := bytes.Index(b[start:end], sign); i == -1 {
+	i = bytes.Index(b[start:end], sign)
+	if i == -1 {
 		return false
-	} else {
-		start += i
 	}
 
-	start += 4 + 26
+	start += i + 4 + 26
 
 	return bl < l+start && bytes.Equal(b[start:l+start], word)
 }
