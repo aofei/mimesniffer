@@ -12,14 +12,14 @@ MIMESniffer implements the algorithm described at
 [magic numbers](https://en.wikipedia.org/wiki/Magic_number_\(programming\)#Magic_numbers_in_files))
 listed [here](https://www.garykessler.net/library/file_sigs.html) to determine
 the MIME type of the given data. So it can be used as an alternative for the
-`http.DetectContentType()`.
+`http.DetectContentType`.
 
 ## Features
 
 * Extremely easy to use
 	* Only two functions
-		* `mimesniffer.Register()`
-		* `mimesniffer.Sniff()`
+		* `mimesniffer.Register`
+		* `mimesniffer.Sniff`
 * Quite fast
 * Supports a wide range of MIME types
 	* `application/epub+zip`

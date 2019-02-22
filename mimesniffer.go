@@ -10,7 +10,7 @@ import (
 
 var (
 	// defaultSniffers is the default supported sniffers beyond the
-	// `http.DetectContentType()`.
+	// `http.DetectContentType`.
 	defaultSniffers = map[string]func([]byte) bool{
 		"application/epub+zip":              applicationEPUBZip,
 		"application/font-sfnt":             applicationFontSFNT,
