@@ -1,3 +1,6 @@
+/*
+Package mimesniffer implements a MIME type sniffer for Go.
+*/
 package mimesniffer
 
 import (
@@ -75,8 +78,8 @@ func Register(mimeType string, sniffer func([]byte) bool) {
 // Sniff sniffs the MIME type of the b. It considers at most the first 512 bytes
 // of the b.
 //
-// It always returns a valid MIME type: if it cannot determine a more specific
-// one, it returns "application/octet-stream".
+// The `Sniff` always returns a valid MIME type: if it cannot determine a more
+// specific one, it returns "application/octet-stream".
 func Sniff(b []byte) string {
 	if len(b) == 0 {
 		return "application/octet-stream"
