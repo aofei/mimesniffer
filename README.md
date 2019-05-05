@@ -12,14 +12,14 @@ MIMESniffer implements the algorithm described at
 [magic numbers](https://en.wikipedia.org/wiki/Magic_number_\(programming\)#Magic_numbers_in_files))
 listed [here](https://www.garykessler.net/library/file_sigs.html) to determine
 the MIME type of the given data. So it can be used as an alternative for the
-`http.DetectContentType`.
+[`http.DetectContentType`](https://godoc.org/net/http#DetectContentType).
 
 ## Features
 
 * Extremely easy to use
 	* Only two functions
-		* `mimesniffer.Register`
-		* `mimesniffer.Sniff`
+		* [`mimesniffer.Register`](https://godoc.org/github.com/aofei/mimesniffer#Register)
+		* [`mimesniffer.Sniff`](https://godoc.org/github.com/aofei/mimesniffer#Sniff)
 * Quite fast
 * Supports a wide range of MIME types
 	* `application/epub+zip`
@@ -113,12 +113,12 @@ done.
 
 ## Community
 
-If you want to discuss this project, or ask questions about it, simply post
+If you want to discuss MIMESniffer, or ask questions about it, simply post
 questions or ideas [here](https://github.com/aofei/mimesniffer/issues).
 
 ## Contributing
 
-If you want to help build this project, simply follow
+If you want to help build MIMESniffer, simply follow
 [this](https://github.com/aofei/mimesniffer/wiki/Contributing) to send pull requests
 [here](https://github.com/aofei/mimesniffer/pulls).
 
