@@ -108,7 +108,7 @@ $ go get github.com/aofei/mimesniffer
 
 done.
 
-> The only requirement is the [Go](https://golang.org), at least v1.2.
+> The only requirement is the [Go](https://golang.org), at least v1.5.
 
 ## Community
 
