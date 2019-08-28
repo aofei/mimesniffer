@@ -1,7 +1,6 @@
 # MIMESniffer
 
-[![Build Status](https://travis-ci.org/aofei/mimesniffer.svg?branch=master)](https://travis-ci.org/aofei/mimesniffer)
-[![Coverage Status](https://coveralls.io/repos/github/aofei/mimesniffer/badge.svg?branch=master)](https://coveralls.io/github/aofei/mimesniffer?branch=master)
+[![codecov](https://codecov.io/gh/aofei/mimesniffer/branch/master/graph/badge.svg)](https://codecov.io/gh/aofei/mimesniffer)
 [![Go Report Card](https://goreportcard.com/badge/github.com/aofei/mimesniffer)](https://goreportcard.com/report/github.com/aofei/mimesniffer)
 [![GoDoc](https://godoc.org/github.com/aofei/mimesniffer?status.svg)](https://godoc.org/github.com/aofei/mimesniffer)
 
