@@ -3,7 +3,7 @@
 [![GitHub Actions](https://github.com/aofei/mimesniffer/workflows/Main/badge.svg)](https://github.com/aofei/mimesniffer)
 [![codecov](https://codecov.io/gh/aofei/mimesniffer/branch/master/graph/badge.svg)](https://codecov.io/gh/aofei/mimesniffer)
 [![Go Report Card](https://goreportcard.com/badge/github.com/aofei/mimesniffer)](https://goreportcard.com/report/github.com/aofei/mimesniffer)
-[![GoDoc](https://godoc.org/github.com/aofei/mimesniffer?status.svg)](https://godoc.org/github.com/aofei/mimesniffer)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/aofei/mimesniffer)](https://pkg.go.dev/github.com/aofei/mimesniffer)
 
 A MIME type sniffer for Go.
 
@@ -12,14 +12,14 @@ MIMESniffer implements the algorithm described at
 [magic numbers](https://en.wikipedia.org/wiki/Magic_number_\(programming\)#Magic_numbers_in_files))
 listed [here](https://www.garykessler.net/library/file_sigs.html) to determine
 the MIME type of the given data. So it can be used as an alternative for the
-[`http.DetectContentType`](https://godoc.org/net/http#DetectContentType).
+[`http.DetectContentType`](https://pkg.go.dev/net/http#DetectContentType).
 
 ## Features
 
 * Extremely easy to use
 	* Only two functions
-		* [`mimesniffer.Register`](https://godoc.org/github.com/aofei/mimesniffer#Register)
-		* [`mimesniffer.Sniff`](https://godoc.org/github.com/aofei/mimesniffer#Sniff)
+		* [`mimesniffer.Register`](https://pkg.go.dev/github.com/aofei/mimesniffer#Register)
+		* [`mimesniffer.Sniff`](https://pkg.go.dev/github.com/aofei/mimesniffer#Sniff)
 * Quite fast
 * Supports a wide range of MIME types
 	* `application/epub+zip`
