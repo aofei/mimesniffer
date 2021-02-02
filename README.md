@@ -17,7 +17,7 @@ the MIME type of the given data. So it can be used as an alternative for the
 ## Features
 
 * Extremely easy to use
-	* Only two functions
+	* Two functions
 		* [`mimesniffer.Register`](https://pkg.go.dev/github.com/aofei/mimesniffer#Register)
 		* [`mimesniffer.Sniff`](https://pkg.go.dev/github.com/aofei/mimesniffer#Sniff)
 * Quite fast
