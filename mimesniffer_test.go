@@ -3,28 +3,28 @@ package mimesniffer
 import "testing"
 
 func TestRegister(t *testing.T) {
-	if l := len(registeredSniffers); l != 0 {
-		t.Errorf("got %d, want 0", l)
+	if got, want := len(registeredSniffers), 0; got != want {
+		t.Errorf("got %d, want %d", got, want)
 	}
 
 	Register("", func([]byte) bool { return true })
-	if l := len(registeredSniffers); l != 0 {
-		t.Errorf("got %d, want 0", l)
+	if got, want := len(registeredSniffers), 0; got != want {
+		t.Errorf("got %d, want %d", got, want)
 	}
 
 	Register("foobar", func([]byte) bool { return true })
-	if l := len(registeredSniffers); l != 1 {
-		t.Errorf("got %d, want 1", l)
+	if got, want := len(registeredSniffers), 1; got != want {
+		t.Errorf("got %d, want %d", got, want)
 	}
 
 	Register("foo/bar", func([]byte) bool { return true })
-	if l := len(registeredSniffers); l != 2 {
-		t.Errorf("got %d, want 2", l)
+	if got, want := len(registeredSniffers), 2; got != want {
+		t.Errorf("got %d, want %d", got, want)
 	}
 
 	Register("foo/bar; charset=utf8", func([]byte) bool { return true })
-	if l := len(registeredSniffers); l != 3 {
-		t.Errorf("got %d, want 3", l)
+	if got, want := len(registeredSniffers), 3; got != want {
+		t.Errorf("got %d, want %d", got, want)
 	}
 }
 
