@@ -12,8 +12,6 @@ import (
 )
 
 var (
-	// defaultSniffers is the default supported sniffers beyond the
-	// `http.DetectContentType`.
 	defaultSniffers = map[string]func([]byte) bool{
 		"application/epub+zip":              applicationEPUBZip,
 		"application/font-sfnt":             applicationFontSFNT,
@@ -60,11 +58,10 @@ var (
 		"video/x-msvideo":                                                           videoXMSVideo,
 	}
 
-	// registeredSniffers is the registered supported sniffers.
 	registeredSniffers = map[string]func([]byte) bool{}
 )
 
-// Register registers the sniffer for the mimeType. Invalid MIME types will be
+// Register registers the sniffer for the `mimeType`. Invalid MIME types will be
 // silently dropped.
 func Register(mimeType string, sniffer func([]byte) bool) {
 	mimeType = strings.ToLower(mimeType)
@@ -75,10 +72,10 @@ func Register(mimeType string, sniffer func([]byte) bool) {
 	registeredSniffers[mimeType] = sniffer
 }
 
-// Sniff sniffs the MIME type of the b. It considers at most the first 512 bytes
-// of the b.
+// Sniff sniffs the MIME type of the `b`. It considers at most the first 512
+// bytes of the `b`.
 //
-// The `Sniff` always returns a valid MIME type: if it cannot determine a more
+// The `Sniff` always returns a valid MIME type. If it cannot determine a more
 // specific one, it returns "application/octet-stream".
 func Sniff(b []byte) string {
 	if len(b) == 0 {
@@ -100,7 +97,7 @@ func Sniff(b []byte) string {
 	return http.DetectContentType(b)
 }
 
-// applicationEPUBZip reports whether the b's MIME type is
+// applicationEPUBZip reports whether the `b`'s MIME type is
 // "application/epub+zip".
 func applicationEPUBZip(b []byte) bool {
 	return len(b) > 57 &&
@@ -138,7 +135,7 @@ func applicationEPUBZip(b []byte) bool {
 		b[57] == 0x70
 }
 
-// applicationFontSFNT reports whether the b's MIME type is
+// applicationFontSFNT reports whether the `b`'s MIME type is
 // "application/font-sfnt".
 func applicationFontSFNT(b []byte) bool {
 	return len(b) > 4 &&
@@ -154,7 +151,7 @@ func applicationFontSFNT(b []byte) bool {
 			b[4] == 0x00
 }
 
-// applicationFontWOFF reports whether the b's MIME type is
+// applicationFontWOFF reports whether the `b`'s MIME type is
 // "application/font-woff".
 func applicationFontWOFF(b []byte) bool {
 	return len(b) > 7 &&
@@ -176,7 +173,8 @@ func applicationFontWOFF(b []byte) bool {
 			b[7] == 0x00
 }
 
-// applicationMSWord reports whether the b's MIME type is "application/msword".
+// applicationMSWord reports whether the `b`'s MIME type is
+// "application/msword".
 func applicationMSWord(b []byte) bool {
 	return len(b) > 7 &&
 		b[0] == 0xd0 &&
@@ -189,7 +187,7 @@ func applicationMSWord(b []byte) bool {
 		b[7] == 0xe1
 }
 
-// applicationRTF reports whether the b's MIME type is "application/rtf".
+// applicationRTF reports whether the `b`'s MIME type is "application/rtf".
 func applicationRTF(b []byte) bool {
 	return len(b) > 4 &&
 		b[0] == 0x7b &&
@@ -199,7 +197,7 @@ func applicationRTF(b []byte) bool {
 		b[4] == 0x66
 }
 
-// applicationVNDMSCABCompressed reports whether the b's MIME type is
+// applicationVNDMSCABCompressed reports whether the `b`'s MIME type is
 // "application/vnd.ms-cab-compressed".
 func applicationVNDMSCABCompressed(b []byte) bool {
 	return len(b) > 3 &&
@@ -213,7 +211,7 @@ func applicationVNDMSCABCompressed(b []byte) bool {
 				b[3] == 0x28)
 }
 
-// applicationVNDMSExcel reports whether the b's MIME type is
+// applicationVNDMSExcel reports whether the `b`'s MIME type is
 // "application/vnd.ms-excel".
 func applicationVNDMSExcel(b []byte) bool {
 	return len(b) > 7 &&
@@ -227,7 +225,7 @@ func applicationVNDMSExcel(b []byte) bool {
 		b[7] == 0xe1
 }
 
-// applicationVNDMSPowerpoint reports whether the b's MIME type is
+// applicationVNDMSPowerpoint reports whether the `b`'s MIME type is
 // "application/vnd.ms-powerpoint".
 func applicationVNDMSPowerpoint(b []byte) bool {
 	return len(b) > 7 &&
@@ -242,7 +240,7 @@ func applicationVNDMSPowerpoint(b []byte) bool {
 }
 
 // applicationVNDOpenXMLFormatsOfficeDocumentPresentationMLPresentation reports
-// whether the b's MIME type is
+// whether the `b`'s MIME type is
 // "application/vnd.openxmlformats-officedocument.presentationml.presentation".
 func applicationVNDOpenXMLFormatsOfficeDocumentPresentationMLPresentation(
 	b []byte,
@@ -322,7 +320,7 @@ func applicationVNDOpenXMLFormatsOfficeDocumentPresentationMLPresentation(
 }
 
 // applicationVNDOpenXMLFormatsOfficeDocumentSpreadsheeetMLSheet reports whether
-// the b's MIME type is
+// the `b`'s MIME type is
 // "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".
 func applicationVNDOpenXMLFormatsOfficeDocumentSpreadsheeetMLSheet(
 	b []byte,
@@ -402,7 +400,7 @@ func applicationVNDOpenXMLFormatsOfficeDocumentSpreadsheeetMLSheet(
 }
 
 // applicationVNDOpenXMLFormatsOfficeDocumentWordprocessingMLDocument reports
-// whether the b's MIME type is
+// whether the `b`'s MIME type is
 // "application/vnd.openxmlformats-officedocument.wordprocessingml.document".
 func applicationVNDOpenXMLFormatsOfficeDocumentWordprocessingMLDocument(
 	b []byte,
@@ -481,7 +479,7 @@ func applicationVNDOpenXMLFormatsOfficeDocumentWordprocessingMLDocument(
 	return bl < l+start && bytes.Equal(b[start:l+start], word)
 }
 
-// applicationX7ZCompressed reports whether the b's MIME type is
+// applicationX7ZCompressed reports whether the `b`'s MIME type is
 // "application/x-7z-compressed".
 func applicationX7ZCompressed(b []byte) bool {
 	return len(b) > 5 &&
@@ -493,7 +491,8 @@ func applicationX7ZCompressed(b []byte) bool {
 		b[5] == 0x1c
 }
 
-// applicationXBzip2 reports whether the b's MIME type is "application/x-bzip2".
+// applicationXBzip2 reports whether the `b`'s MIME type is
+// "application/x-bzip2".
 func applicationXBzip2(b []byte) bool {
 	return len(b) > 2 &&
 		b[0] == 0x42 &&
@@ -501,7 +500,7 @@ func applicationXBzip2(b []byte) bool {
 		b[2] == 0x68
 }
 
-// applicationXCompress reports whether the b's MIME type is
+// applicationXCompress reports whether the `b`'s MIME type is
 // "application/x-compress".
 func applicationXCompress(b []byte) bool {
 	return len(b) > 1 &&
@@ -511,7 +510,7 @@ func applicationXCompress(b []byte) bool {
 				b[1] == 0x9d)
 }
 
-// applicationXDEB reports whether the b's MIME type is "application/x-deb".
+// applicationXDEB reports whether the `b`'s MIME type is "application/x-deb".
 func applicationXDEB(b []byte) bool {
 	return len(b) > 20 &&
 		b[0] == 0x21 &&
@@ -537,7 +536,7 @@ func applicationXDEB(b []byte) bool {
 		b[20] == 0x79
 }
 
-// applicationXExecutable reports whether the b's MIME type is
+// applicationXExecutable reports whether the `b`'s MIME type is
 // "application/x-executable".
 func applicationXExecutable(b []byte) bool {
 	return len(b) > 52 &&
@@ -547,7 +546,7 @@ func applicationXExecutable(b []byte) bool {
 		b[3] == 0x46
 }
 
-// applicationXGoogleChromeExtension reports whether the b's MIME type is
+// applicationXGoogleChromeExtension reports whether the `b`'s MIME type is
 // "application/x-google-chrome-extension".
 func applicationXGoogleChromeExtension(b []byte) bool {
 	return len(b) > 3 &&
@@ -557,7 +556,7 @@ func applicationXGoogleChromeExtension(b []byte) bool {
 		b[3] == 0x34
 }
 
-// applicationXLzip reports whether the b's MIME type is "application/x-lzip".
+// applicationXLzip reports whether the `b`'s MIME type is "application/x-lzip".
 func applicationXLzip(b []byte) bool {
 	return len(b) > 3 &&
 		b[0] == 0x4c &&
@@ -566,7 +565,7 @@ func applicationXLzip(b []byte) bool {
 		b[3] == 0x50
 }
 
-// applicationXMSDownload reports whether the b's MIME type is
+// applicationXMSDownload reports whether the `b`'s MIME type is
 // "application/x-msdownload".
 func applicationXMSDownload(b []byte) bool {
 	return len(b) > 1 &&
@@ -574,7 +573,7 @@ func applicationXMSDownload(b []byte) bool {
 		b[1] == 0x5a
 }
 
-// applicationXNintendoNESROM reports whether the b's MIME type is
+// applicationXNintendoNESROM reports whether the `b`'s MIME type is
 // "application/x-nintendo-nes-rom".
 func applicationXNintendoNESROM(b []byte) bool {
 	return len(b) > 3 &&
@@ -584,7 +583,7 @@ func applicationXNintendoNESROM(b []byte) bool {
 		b[3] == 0x1a
 }
 
-// applicationXRPM reports whether the b's MIME type is "application/x-rpm".
+// applicationXRPM reports whether the `b`'s MIME type is "application/x-rpm".
 func applicationXRPM(b []byte) bool {
 	return len(b) > 96 &&
 		b[0] == 0xed &&
@@ -593,7 +592,7 @@ func applicationXRPM(b []byte) bool {
 		b[3] == 0xdb
 }
 
-// applicationXShockwaveFlash reports whether the b's MIME type is
+// applicationXShockwaveFlash reports whether the `b`'s MIME type is
 // "application/x-shockwave-flash".
 func applicationXShockwaveFlash(b []byte) bool {
 	return len(b) > 2 &&
@@ -603,7 +602,7 @@ func applicationXShockwaveFlash(b []byte) bool {
 		b[2] == 0x53
 }
 
-// applicationXSQLite3 reports whether the b's MIME type is
+// applicationXSQLite3 reports whether the `b`'s MIME type is
 // "application/x-sqlite3".
 func applicationXSQLite3(b []byte) bool {
 	return len(b) > 3 &&
@@ -613,7 +612,7 @@ func applicationXSQLite3(b []byte) bool {
 		b[3] == 0x69
 }
 
-// applicationXTar reports whether the b's MIME type is "application/x-tar".
+// applicationXTar reports whether the `b`'s MIME type is "application/x-tar".
 func applicationXTar(b []byte) bool {
 	return len(b) > 261 &&
 		b[257] == 0x75 &&
@@ -623,7 +622,7 @@ func applicationXTar(b []byte) bool {
 		b[261] == 0x72
 }
 
-// applicationXUNIXArchive reports whether the b's MIME type is
+// applicationXUNIXArchive reports whether the `b`'s MIME type is
 // "application/x-unix-archive".
 func applicationXUNIXArchive(b []byte) bool {
 	return len(b) > 6 &&
@@ -636,7 +635,7 @@ func applicationXUNIXArchive(b []byte) bool {
 		b[6] == 0x3e
 }
 
-// applicationXXZ reports whether the b's MIME type is "application/x-xz".
+// applicationXXZ reports whether the `b`'s MIME type is "application/x-xz".
 func applicationXXZ(b []byte) bool {
 	return len(b) > 5 &&
 		b[0] == 0xfd &&
@@ -647,7 +646,7 @@ func applicationXXZ(b []byte) bool {
 		b[5] == 0x00
 }
 
-// audioAAC reports whether the b's MIME type is "audio/aac".
+// audioAAC reports whether the `b`'s MIME type is "audio/aac".
 func audioAAC(b []byte) bool {
 	return len(b) > 1 &&
 		(b[0] == 0xff &&
@@ -656,7 +655,7 @@ func audioAAC(b []byte) bool {
 				b[1] == 0xf9)
 }
 
-// audioAMR reports whether the b's MIME type is "audio/amr".
+// audioAMR reports whether the `b`'s MIME type is "audio/amr".
 func audioAMR(b []byte) bool {
 	return len(b) > 11 &&
 		b[0] == 0x23 &&
@@ -667,7 +666,7 @@ func audioAMR(b []byte) bool {
 		b[5] == 0x0a
 }
 
-// audioM4A reports whether the b's MIME type is "audio/m4a".
+// audioM4A reports whether the `b`'s MIME type is "audio/m4a".
 func audioM4A(b []byte) bool {
 	return len(b) > 10 &&
 		(b[4] == 0x66 &&
@@ -683,7 +682,7 @@ func audioM4A(b []byte) bool {
 				b[3] == 0x20)
 }
 
-// audioOgg reports whether the b's MIME type is "audio/ogg".
+// audioOgg reports whether the `b`'s MIME type is "audio/ogg".
 func audioOgg(b []byte) bool {
 	return len(b) > 3 &&
 		b[0] == 0x4f &&
@@ -692,7 +691,7 @@ func audioOgg(b []byte) bool {
 		b[3] == 0x53
 }
 
-// audioXFLAC reports whether the b's MIME type is "audio/x-flac".
+// audioXFLAC reports whether the `b`'s MIME type is "audio/x-flac".
 func audioXFLAC(b []byte) bool {
 	return len(b) > 3 &&
 		b[0] == 0x66 &&
@@ -701,7 +700,7 @@ func audioXFLAC(b []byte) bool {
 		b[3] == 0x43
 }
 
-// audioXWAV reports whether the b's MIME type is "audio/x-wav".
+// audioXWAV reports whether the `b`'s MIME type is "audio/x-wav".
 func audioXWAV(b []byte) bool {
 	return len(b) > 11 &&
 		b[0] == 0x52 &&
@@ -714,7 +713,7 @@ func audioXWAV(b []byte) bool {
 		b[11] == 0x45
 }
 
-// imageJP2 reports whether the b's MIME type is "image/jp2".
+// imageJP2 reports whether the `b`'s MIME type is "image/jp2".
 func imageJP2(b []byte) bool {
 	return len(b) > 12 &&
 		b[0] == 0x0 &&
@@ -732,7 +731,7 @@ func imageJP2(b []byte) bool {
 		b[12] == 0x0
 }
 
-// imageTIFF reports whether the b's MIME type is "image/tiff".
+// imageTIFF reports whether the `b`'s MIME type is "image/tiff".
 func imageTIFF(b []byte) bool {
 	return len(b) > 3 &&
 		(b[0] == 0x49 &&
@@ -745,7 +744,7 @@ func imageTIFF(b []byte) bool {
 				b[3] == 0x2a)
 }
 
-// imageVNDAdobePhotoshop reports whether the b's MIME type is
+// imageVNDAdobePhotoshop reports whether the `b`'s MIME type is
 // "image/vnd.adobe.photoshop".
 func imageVNDAdobePhotoshop(b []byte) bool {
 	return len(b) > 3 &&
@@ -755,7 +754,7 @@ func imageVNDAdobePhotoshop(b []byte) bool {
 		b[3] == 0x53
 }
 
-// imageXCanonCR2 reports whether the b's MIME type is "image/x-canon-cr2".
+// imageXCanonCR2 reports whether the `b`'s MIME type is "image/x-canon-cr2".
 func imageXCanonCR2(b []byte) bool {
 	return len(b) > 9 &&
 		(b[0] == 0x49 &&
@@ -769,7 +768,7 @@ func imageXCanonCR2(b []byte) bool {
 		b[8] == 0x43 && b[9] == 0x52
 }
 
-// videoMPEG reports whether the b's MIME type is "video/mpeg".
+// videoMPEG reports whether the `b`'s MIME type is "video/mpeg".
 func videoMPEG(b []byte) bool {
 	return len(b) > 3 &&
 		b[0] == 0x0 &&
@@ -779,7 +778,7 @@ func videoMPEG(b []byte) bool {
 		b[3] <= 0xbf
 }
 
-// videoQuickTime reports whether the b's MIME type is "video/quicktime".
+// videoQuickTime reports whether the `b`'s MIME type is "video/quicktime".
 func videoQuickTime(b []byte) bool {
 	return len(b) > 15 &&
 		(b[0] == 0x0 &&
@@ -804,7 +803,7 @@ func videoQuickTime(b []byte) bool {
 				b[15] == 0x74)
 }
 
-// videoXFLV reports whether the b's MIME type is "video/x-flv".
+// videoXFLV reports whether the `b`'s MIME type is "video/x-flv".
 func videoXFLV(b []byte) bool {
 	return len(b) > 3 &&
 		b[0] == 0x46 &&
@@ -813,7 +812,7 @@ func videoXFLV(b []byte) bool {
 		b[3] == 0x01
 }
 
-// videoXM4V reports whether the b's MIME type is "video/x-m4v".
+// videoXM4V reports whether the `b`'s MIME type is "video/x-m4v".
 func videoXM4V(b []byte) bool {
 	return len(b) > 10 &&
 		b[4] == 0x66 &&
@@ -825,7 +824,7 @@ func videoXM4V(b []byte) bool {
 		b[10] == 0x56
 }
 
-// videoXMatroska reports whether the b's MIME type is "video/x-matroska".
+// videoXMatroska reports whether the `b`'s MIME type is "video/x-matroska".
 func videoXMatroska(b []byte) bool {
 	return (len(b) > 15 &&
 		b[0] == 0x1a &&
@@ -855,7 +854,7 @@ func videoXMatroska(b []byte) bool {
 			b[38] == 0x61)
 }
 
-// videoXMSWMV reports whether the b's MIME type is "video/x-ms-wmv".
+// videoXMSWMV reports whether the `b`'s MIME type is "video/x-ms-wmv".
 func videoXMSWMV(b []byte) bool {
 	return len(b) > 9 &&
 		b[0] == 0x30 &&
@@ -870,7 +869,7 @@ func videoXMSWMV(b []byte) bool {
 		b[9] == 0xd9
 }
 
-// videoXMSVideo reports whether the b's MIME type is "video/x-msvideo".
+// videoXMSVideo reports whether the `b`'s MIME type is "video/x-msvideo".
 func videoXMSVideo(b []byte) bool {
 	return len(b) > 10 &&
 		b[0] == 0x52 &&
