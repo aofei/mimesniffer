@@ -98,6 +98,7 @@ the MIME type of the given data. So it can be used as an alternative for the
 	* `video/x-matroska`
 	* `video/x-ms-wmv`
 	* `video/x-msvideo`
+* Zero third-party dependencies
 
 ## Installation
 
