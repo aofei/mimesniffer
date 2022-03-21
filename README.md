@@ -1,6 +1,6 @@
 # MIMESniffer
 
-[![GitHub Actions](https://github.com/aofei/mimesniffer/workflows/Main/badge.svg)](https://github.com/aofei/mimesniffer)
+[![GitHub Actions](https://github.com/aofei/mimesniffer/workflows/Test/badge.svg)](https://github.com/aofei/mimesniffer)
 [![codecov](https://codecov.io/gh/aofei/mimesniffer/branch/master/graph/badge.svg)](https://codecov.io/gh/aofei/mimesniffer)
 [![Go Report Card](https://goreportcard.com/badge/github.com/aofei/mimesniffer)](https://goreportcard.com/report/github.com/aofei/mimesniffer)
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/aofei/mimesniffer)](https://pkg.go.dev/github.com/aofei/mimesniffer)
